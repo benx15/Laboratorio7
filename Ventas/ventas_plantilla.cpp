@@ -12,6 +12,8 @@ using tVentas = int[DIAS];
 void inicializarAleatoriamente(tVentas ventas);
 void mostrar(const tVentas ventas);
 void mayorVenta(tVentas ventas);
+void diaVentaMayor(tVentas ventas);
+void cuantosDias(tVentas ventas);
 
 // incorpora aquí los prototipos de los subprogramas pedidos
 
@@ -23,10 +25,15 @@ int main() {
 
 	inicializarAleatoriamente(ventas);  // inicialización aleatoria del array
 	mostrar(ventas);  // visualización del contenido del array
-	mayorVenta(ventas);
+	
+
 	cout << endl;
 
 	// incorpora aquí código para implementar los subprogramas pedidos
+	mayorVenta(ventas);
+	cuantosDias(ventas);
+	diaVentaMayor(ventas);
+	
 
 	return 0;
 }
@@ -55,12 +62,44 @@ void mostrar(const tVentas ventas) {
 }
 
 void mayorVenta(tVentas ventas) {
+	int mayor= ventas[0];
 	for (int i = 0; i < DIAS; i++) {
-		if (INT16_MIN < ventas[i])
-			cout << "La venta mayor es: " << ventas[i];
+		if (mayor < ventas[i])
+			mayor = ventas[i];
 	}	
-	
-		
+	cout << "La venta mayor es: " << mayor << endl;
 }
 
-// implementa aquí los subprogramas pedidos
+void diaVentaMayor(tVentas ventas) {
+	int umbral = 0;
+	cout << "Inserte el umbral: " ;
+	cin >> umbral;
+	for (int i = 0; i < DIAS; i++) {
+		if (umbral < ventas[i] ) {
+			cout << "El dia que se supero el umbral: " << ventas[i] << endl;
+		}
+		else {
+			cout << "-1" ;
+		}
+		
+	}
+}
+
+void cuantosDias(tVentas ventas) {
+	int u = 0;
+	int suma = 0;
+	int cont = 0;
+	cout << "Inserte el umbral: ";
+	cin >> u;
+	for (int i = 0; i < DIAS; i++) {
+		suma = suma + ventas[i];
+		cont++;
+	}
+	if (u <= suma) {
+		cout << "Ha pasado: " << cont << " dias";
+	}
+	else {
+		cout << "8";
+	}
+
+}
