@@ -72,17 +72,23 @@ void mayorVenta(tVentas ventas) {
 
 void diaVentaMayor(tVentas ventas) {
 	int umbral = 0;
-	cout << "Inserte el umbral: " ;
+	cout << "Inserte el umbral: ";
 	cin >> umbral;
+
+	int resultado = -1;  
+
 	for (int i = 0; i < DIAS; i++) {
-		if (umbral < ventas[i] ) {
-			cout << "El dia que se supero el umbral: " << ventas[i] << endl;
+		if (ventas[i] > umbral) {
+			resultado = i;  
 		}
-		else {
-			cout << "-1" ;
-		}
-		
+
 	}
+
+	if (resultado == -1)
+		cout << "Ningun dia supero el umbral -> -1" << endl;
+	else
+		cout << "El dia mas cercano al final que supero el umbral: dia " << resultado + 1 << " (indice " << resultado << ")" << endl;
+
 }
 
 void cuantosDias(tVentas ventas) {
@@ -91,15 +97,20 @@ void cuantosDias(tVentas ventas) {
 	int cont = 0;
 	cout << "Inserte el umbral: ";
 	cin >> u;
-	for (int i = 0; i < DIAS; i++) {
+	bool encontrado = false;
+
+	for (int i = 0; i < DIAS && !encontrado; i++) {
 		suma = suma + ventas[i];
 		cont++;
+		if (suma >= u) {
+			encontrado = true;  
+		}
+
 	}
-	if (u <= suma) {
-		cout << "Ha pasado: " << cont << " dias";
-	}
-	else {
-		cout << "8";
-	}
+
+	if (encontrado)
+		cout << "Ha pasado: " << cont << " dias" << endl;
+	else
+		cout << "8" << endl;
 
 }
